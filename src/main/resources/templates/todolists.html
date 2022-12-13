@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<!--xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"-->
+<head>
+  <title>Hello World!</title>
+</head>
+<body>
+<h1>Ваши списки</h1>
+<!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+<!--<form th:action="@{/logout}" method="post">-->
+<!--  <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
+<div>
+    <form action="/" method="post">
+        <input type="text" name="title" placeholder="Введите заголовок">
+        <input type="text" name="description" placeholder="Введите описание">
+        <button type="submit">Добавить :)</button>
+    </form>
+</div>
+
+<div th:each="el : ${todoLists}">
+    <h4 th:text="${el.title}"/>
+    <p th:text="${el.description}"/>
+    <a th:href="'/'+${el.id}+'/items'">Задачи</a>
+    <a th:href="'/'+${el.id}+'/edit'">Редактировать</a>
+    <form th:action="'/'+${el.id}+'/delete'" method="post">
+        <button type="submit">Удалить</button>
+    </form>
+</div>
+</body>
+</html>
